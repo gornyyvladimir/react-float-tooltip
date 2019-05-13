@@ -20,10 +20,12 @@ yarn add react-float-tooltip
 
 1 . Add id="tooltip-root" to your index.html under id="root"
 ```html
+<div id="root"></div>
+<!-- put your tooltip container here -->
 <div id="tooltip-root"></div>
 ```
 
-2 . Use this example
+2 . Use this simple example
 
 ```jsx
 import React, { Component } from 'react'
@@ -40,8 +42,23 @@ class App extends Component {
     );
   }
 }
-
 ```
+
+## Examples
+You can find examples in "examples" folder
+
+Online examples: <https://github.com/gornyyvladimir>
+
+## Api
+### Props
+
+| name           | type          | default | isRequired | description                                           |
+|----------------|---------------|---------|------------|-------------------------------------------------------|
+| disable        | boolean       | false   | false      | disable tooltip                                       |
+| isRevert       | boolean       | false   | false      | revert tooltip if it has no place from the right edge |
+| offset         | number        | 0       | false      | tooltip offset from right edge                        |
+| tooltipElement | function      |         | true       | function that returns component for render tooltip    |
+| children       | React.Element |         | true       | wrapped element                                       |
 
 ## License
 
