@@ -47,7 +47,7 @@ class App extends Component {
 ## Examples
 You can find examples in "examples" folder
 
-Online examples: <https://github.com/gornyyvladimir>
+Online examples: <https://gornyyvladimir.github.io/react-float-tooltip/>
 
 ## Api
 ### Props
