@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/react-float-tooltip.svg)](https://www.npmjs.com/package/react-float-tooltip) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Preview
+
+![react-float-tooltip gif](https://raw.githubusercontent.com/gornyyvladimir/react-float-tooltip/master/tooltip.gif)
+
 ## Install
 
 ```bash
