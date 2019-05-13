@@ -10,20 +10,37 @@
 npm install --save react-float-tooltip
 ```
 
+or
+
+```bash
+yarn add react-float-tooltip
+```
+
 ## Usage
+
+1 . Add id="tooltip-root" to your index.html under id="root"
+```html
+<div id="tooltip-root"></div>
+```
+
+2 . Use this example
 
 ```jsx
 import React, { Component } from 'react'
+import Tooltip from 'react-float-tooltip'
 
-import MyComponent from 'react-float-tooltip'
-
-class Example extends Component {
-  render () {
+class App extends Component {
+  render() {
     return (
-      <MyComponent />
-    )
+      <div>
+        <Tooltip tooltipElement={() => <div style={{background: 'yellow'}}>Tooltip</div>}>
+          <div>Element with tooltip</div>
+        </Tooltip>
+      </div>
+    );
   }
 }
+
 ```
 
 ## License
