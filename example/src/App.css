@@ -1,0 +1,21 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tooltipElement {
+  background: #1C2544;
+  border-radius: 2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 2px;
+  font-weight: 100;
+}
