@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Tooltip tooltipElement={() => <div style={{background: 'blue'}}>Tooltip</div>}>
+        <Tooltip tooltipElement={() => <div style={{background: 'yellow'}}>Tooltip</div>}>
           <div>Element with tooltip</div>
         </Tooltip>
       </div>
