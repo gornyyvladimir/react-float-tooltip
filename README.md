@@ -7,9 +7,13 @@
 
 ## Preview
 
+This React Component lets you create full-controlled float tooltips like that. And it's easy to use 👍 Also check out [demo](https://gornyyvladimir.github.io/react-float-tooltip/) page 😉 
+
 ![react-float-tooltip gif](https://raw.githubusercontent.com/gornyyvladimir/react-float-tooltip/master/tooltip.gif)
 
-## Install
+## Getting started
+
+Install with [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ```bash
 npm install --save react-float-tooltip
@@ -21,16 +25,15 @@ or
 yarn add react-float-tooltip
 ```
 
-## Usage
+This uses [portals](https://reactjs.org/docs/portals.html) so you need to add `id="tooltip-root"` to your _index.html_ next to `id="root"`
 
-1 . Add id="tooltip-root" to your index.html under id="root"
 ```html
 <div id="root"></div>
-<!-- put your tooltip container here -->
+<!-- tooltip container -->
 <div id="tooltip-root"></div>
 ```
 
-2 . Use this simple example
+**react-float-tooltip** adds a [Tooltip](src/index.js) wrapper that takes tooltip component as a `tooltipElement` prop.
 
 ```jsx
 import React, { Component } from 'react'
@@ -51,10 +54,7 @@ class App extends Component {
 export default App;
 ```
 
-## Examples
-You can find examples in "examples" folder.
-
-Online examples: <https://gornyyvladimir.github.io/react-float-tooltip/>
+Check [example](example) folder for more.
 
 ## Api
 ### Props
@@ -70,8 +70,6 @@ Online examples: <https://gornyyvladimir.github.io/react-float-tooltip/>
 | style          | Object        |         | false      | style for children wrapper component                  |
 
 ## Development
-
-Local development is broken into two parts (ideally using two tabs).
 
 First, run rollup to watch your `src/` module and automatically recompile it into `dist/` whenever you make changes.
 
