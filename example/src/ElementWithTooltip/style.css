@@ -1,6 +1,6 @@
 .elementWithTooltip {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 150px;
+  max-width: 200px;
   white-space: nowrap;
 }

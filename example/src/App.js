@@ -7,7 +7,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Row">
+        <div>
+          <h1>react-float-tooltip</h1>
+          <p>Float tooltip for react components</p>
+        </div>
+        <div className="row">
           <div>
             <Tooltip
               isRevert
@@ -18,11 +22,12 @@ class App extends Component {
           </div>
           <div>
             <Tooltip
-              isRevert
               disable
-              tooltipElement={() => <div className="tooltipElement">Reverted and disabled Tooltip</div>}
+              tooltipElement={() => (
+                <div className="tooltipElement">Disabled Tooltip</div>
+              )}
             >
-              <ElementWithTooltip>Reverted and disabled Tooltip</ElementWithTooltip>
+              <ElementWithTooltip>Disabled Tooltip</ElementWithTooltip>
             </Tooltip>
           </div>
           <div>
@@ -34,7 +39,7 @@ class App extends Component {
             </Tooltip>
           </div>
         </div>
-        <div className="Row">
+        <div className="row">
           <div>
             <Tooltip
               offset={10}
@@ -66,7 +71,7 @@ class App extends Component {
             </Tooltip>
           </div>
         </div>
-        <div className="Row">
+        <div className="row">
           <div>
             <Tooltip
               isRevert
@@ -109,6 +114,26 @@ class App extends Component {
               </ElementWithTooltip>
             </Tooltip>
           </div>
+        </div>
+        <div>
+          <Tooltip
+            className="tooltipWrapper"
+            tooltipElement={() => (
+              <div className="tooltipElement">Without inline-block for tooltip wrapper</div>
+            )}
+          >
+            <ElementWithTooltip>Without inline-block for tooltip wrapper</ElementWithTooltip>
+          </Tooltip>
+        </div>
+        <div>
+          <Tooltip
+            className="tooltipWrapper inline"
+            tooltipElement={() => (
+              <div className="tooltipElement">With inline-block for tooltip wrapper</div>
+            )}
+          >
+            <ElementWithTooltip>With inline-block for tooltip wrapper</ElementWithTooltip>
+          </Tooltip>
         </div>
       </div>
     );

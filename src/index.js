@@ -53,7 +53,7 @@ class Tooltip extends Component {
 
   render() {
     const { show, x, y } = this.state
-    const { tooltipElement, disable, children } = this.props
+    const { tooltipElement, disable, children, className, style } = this.props
 
     if (disable) return children
 
@@ -72,10 +72,12 @@ class Tooltip extends Component {
       <Fragment>
         {show && ReactDOM.createPortal(tooltip, this.el)}
         <div
+          data-test='component-children-wrapper'
           onMouseOver={this.handleMouseOver}
           onMouseLeave={this.handleMouseLeave}
           onMouseMove={this.handleMouseMove}
-          data-test='component-children-wrapper'
+          className={className}
+          style={style}
         >
           {children}
         </div>
@@ -89,7 +91,9 @@ Tooltip.propTypes = {
   isRevert: PropTypes.bool,
   offset: PropTypes.number,
   tooltipElement: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Tooltip

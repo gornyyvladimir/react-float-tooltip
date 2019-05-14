@@ -5,7 +5,7 @@
   justify-content: space-between;
 }
 
-.Row {
+.row {
   display: flex;
   justify-content: space-between;
 }
@@ -18,4 +18,12 @@
   font-size: 12px;
   padding: 2px;
   font-weight: 100;
+}
+
+.tooltipWrapper {
+  background-color: lightblue;
+}
+
+.inline {
+  display: inline-block;
 }

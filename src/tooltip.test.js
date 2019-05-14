@@ -86,7 +86,15 @@ describe('Tooltip', () => {
 test('does not throw warning with expected props', () => {
   const tooltipElement = () => <div>Tooltip Element</div>
   const children = <div data-test='component-children'>Wrapped component</div>
-  const expectedProps = { tooltipElement, children, disable: false, isRevert: true, offset: 0 }
+  const expectedProps = {
+    tooltipElement,
+    children,
+    disable: false,
+    isRevert: true,
+    offset: 0,
+    className: 'class',
+    style: { background: 'yellow' }
+  }
   checkProps(Tooltip, expectedProps)
 })
 describe('Tooltip position is correct', () => {
