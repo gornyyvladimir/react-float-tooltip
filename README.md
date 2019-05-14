@@ -7,7 +7,7 @@
 
 ## Preview
 
-This React Component lets you create full-controlled float tooltips like that. And it's easy to use 👍 Also check out [demo](https://gornyyvladimir.github.io/react-float-tooltip/) page 😉 
+This React Component lets you create full-controlled float tooltips like that. And it's easy to use 👍. Also check out [demo](https://gornyyvladimir.github.io/react-float-tooltip/) page 😉 
 
 ![react-float-tooltip gif](https://raw.githubusercontent.com/gornyyvladimir/react-float-tooltip/master/tooltip.gif)
 
