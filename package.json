@@ -21,6 +21,8 @@
   },
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
+    "coverage": "yarn run test --coverage",
+    "coveralls": "coverage && cat ./coverage/lcov.info | coveralls",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
@@ -43,6 +45,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "check-prop-types": "^1.1.2",
+    "coveralls": "^3.0.3",
     "cross-env": "^5.1.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.0",
