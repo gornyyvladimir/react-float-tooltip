@@ -4,24 +4,28 @@ import PropTypes from 'prop-types'
 import { calcX, calcY, calcXRevert } from './helpers'
 import styles from './styles.css'
 
-function Tooltip (props) {
+const Tooltip = ({ isRevert, tooltipElement, disable, children, className, style, offset = 0 }) => {
   const [show, setShow] = useState(false)
   const [cords, setCords] = useState({ x: 0, y: 0 })
-  const [tooltipRoot] = useState(document.getElementById('tooltip-root'))
-
   const tooltipRef = useRef(null)
 
-  // useEffect(() => {
-  //   console.log("Mount")
-  //   tooltipRoot.appendChild(el)
-  //   return () => {
-  //     console.log("Remove")
-  //     tooltipRoot.removeChild(el)
-  //   }
-  // }, [])
+  const elRef = useRef(null)
+  const tooltipRootRef = useRef(null)
+
+  useEffect(() => {
+    const tooltipRoot = document.getElementById('tooltip-root')
+    const el = document.createElement('div')
+
+    elRef.current = el
+    tooltipRootRef.current = tooltipRoot
+
+    tooltipRootRef.current.appendChild(elRef.current)
+    return () => {
+      tooltipRootRef.current.removeChild(elRef.current)
+    }
+  }, [])
 
   const handleMouseOver = event => {
-    console.log(event.target)
     setShow(true)
   }
 
@@ -30,23 +34,15 @@ function Tooltip (props) {
   }
 
   const handleMouseMove = event => {
-    const { offset } = props
     const { clientX, clientY } = event
-    const { x, y } = getTooltipPosition(clientX, clientY, offset)
-    setCords({ x, y })
-  }
-
-  const getTooltipPosition = (clientX, clientY, offset = 0) => {
-    const { isRevert } = props
+    const { width, height } = tooltipRef.current.getBoundingClientRect()
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
-    const tooltipWidth = tooltipRef.current.getBoundingClientRect().width
-    const tooltipHeight = tooltipRef.current.getBoundingClientRect().height
     const x = isRevert
-      ? calcXRevert(clientX, tooltipWidth, windowWidth, offset)
-      : calcX(clientX, tooltipWidth, windowWidth, offset)
-    const y = calcY(clientY, tooltipHeight, windowHeight, offset)
-    return { x, y }
+      ? calcXRevert(clientX, width, windowWidth, offset)
+      : calcX(clientX, width, windowWidth, offset)
+    const y = calcY(clientY, height, windowHeight, offset)
+    setCords({ x, y })
   }
 
   const tooltip = (
@@ -56,24 +52,24 @@ function Tooltip (props) {
       style={{ left: cords.x, top: cords.y }}
       data-test='component-tooltip'
     >
-      {props.tooltipElement()}
+      {tooltipElement()}
     </div>
   )
 
-  if (props.disable) return props.children
+  if (disable) return children
 
   return (
     <Fragment>
-      {show && ReactDOM.createPortal(tooltip, tooltipRoot)}
+      {show && ReactDOM.createPortal(tooltip, elRef.current)}
       <div
         data-test='component-children-wrapper'
         onMouseOver={handleMouseOver}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
-        className={props.className}
-        style={props.style}
+        className={className}
+        style={style}
       >
-        {props.children}
+        {children}
       </div>
     </Fragment>
   )
