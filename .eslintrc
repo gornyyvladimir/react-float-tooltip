@@ -13,6 +13,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  // "ignorePatterns": ["dist/", "node_modules/"],
   "rules": {
     // don't force es6 functions to include space before paren
     "space-before-function-paren": 0,

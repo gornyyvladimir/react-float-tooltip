@@ -1,89 +1,82 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, useEffect, useRef, Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { calcX, calcY, calcXRevert } from './helpers'
 import styles from './styles.css'
 
-class Tooltip extends Component {
-  state = {
-    show: false,
-    x: 0,
-    y: 0
-  };
+function Tooltip (props) {
+  const [show, setShow] = useState(false)
+  const [cords, setCords] = useState({ x: 0, y: 0 })
+  const [tooltipRoot] = useState(document.getElementById('tooltip-root'))
 
-  tooltipRoot = document.getElementById('tooltip-root');
-  el = document.createElement('div');
-  tooltipRef = React.createRef();
+  const tooltipRef = useRef(null)
 
-  componentDidMount() {
-    this.tooltipRoot.appendChild(this.el)
+  // useEffect(() => {
+  //   console.log("Mount")
+  //   tooltipRoot.appendChild(el)
+  //   return () => {
+  //     console.log("Remove")
+  //     tooltipRoot.removeChild(el)
+  //   }
+  // }, [])
+
+  const handleMouseOver = event => {
+    console.log(event.target)
+    setShow(true)
   }
 
-  componentWillUnmount() {
-    this.tooltipRoot.removeChild(this.el)
+  const handleMouseLeave = event => {
+    setShow(false)
   }
 
-  handleMouseOver = event => {
-    this.setState({ show: true })
-  };
-
-  handleMouseLeave = event => {
-    this.setState({ show: false })
-  };
-
-  handleMouseMove = event => {
-    const { offset } = this.props
+  const handleMouseMove = event => {
+    const { offset } = props
     const { clientX, clientY } = event
-    const { x, y } = this.getTooltipPosition(clientX, clientY, offset)
-    this.setState({ x, y })
-  };
+    const { x, y } = getTooltipPosition(clientX, clientY, offset)
+    setCords({ x, y })
+  }
 
-  getTooltipPosition = (clientX, clientY, offset = 0) => {
-    const { isRevert } = this.props
+  const getTooltipPosition = (clientX, clientY, offset = 0) => {
+    const { isRevert } = props
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
-    const tooltipWidth = this.tooltipRef.current.getBoundingClientRect().width
-    const tooltipHeight = this.tooltipRef.current.getBoundingClientRect().height
+    const tooltipWidth = tooltipRef.current.getBoundingClientRect().width
+    const tooltipHeight = tooltipRef.current.getBoundingClientRect().height
     const x = isRevert
       ? calcXRevert(clientX, tooltipWidth, windowWidth, offset)
       : calcX(clientX, tooltipWidth, windowWidth, offset)
     const y = calcY(clientY, tooltipHeight, windowHeight, offset)
     return { x, y }
-  };
-
-  render() {
-    const { show, x, y } = this.state
-    const { tooltipElement, disable, children, className, style } = this.props
-
-    if (disable) return children
-
-    const tooltip = (
-      <div
-        ref={this.tooltipRef}
-        className={styles.tooltip}
-        style={{ left: x, top: y }}
-        data-test='component-tooltip'
-      >
-        {tooltipElement()}
-      </div>
-    )
-
-    return (
-      <Fragment>
-        {show && ReactDOM.createPortal(tooltip, this.el)}
-        <div
-          data-test='component-children-wrapper'
-          onMouseOver={this.handleMouseOver}
-          onMouseLeave={this.handleMouseLeave}
-          onMouseMove={this.handleMouseMove}
-          className={className}
-          style={style}
-        >
-          {children}
-        </div>
-      </Fragment>
-    )
   }
+
+  const tooltip = (
+    <div
+      ref={tooltipRef}
+      className={styles.tooltip}
+      style={{ left: cords.x, top: cords.y }}
+      data-test='component-tooltip'
+    >
+      {props.tooltipElement()}
+    </div>
+  )
+
+  if (props.disable) return props.children
+
+  return (
+    <Fragment>
+      {show && ReactDOM.createPortal(tooltip, tooltipRoot)}
+      <div
+        data-test='component-children-wrapper'
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        className={props.className}
+        style={props.style}
+      >
+        {props.children}
+      </div>
+    </Fragment>
+  )
 }
 
 Tooltip.propTypes = {
